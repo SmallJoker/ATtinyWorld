@@ -1,0 +1,13 @@
+
+proj/
+*.pdf
+
+# Compiled files
+*.elf
+*.hex
+*.o
+*.run
+
+# IDE
+.kdev4/
+*.kdev4
