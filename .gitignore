@@ -1,10 +1,15 @@
 
-proj/
+apps/
 *.pdf
+
+# Generator files
+CMakeFiles/
+Makefile
 
 # Compiled files
 *.elf
 *.hex
+*.map
 *.o
 *.run
 
