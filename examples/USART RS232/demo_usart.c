@@ -4,8 +4,7 @@
 
 	PB0 : LED (active high)
 
-	See make.sh for speed configuration
-	See headers for byte format
+	See headers for USART/RS232 format
 */
 
 #include <avr/io.h>
@@ -27,20 +26,25 @@ int main()
 
 	USART_Transmit('!'); // START
 
+	u8 counter = 0;
 	while (1) {
-		_delay_ms(500);
+		_delay_ms(1000);
+		USART_Transmit(counter);
 
+		// Wait for 2 bytes (receive)
 		if (USART_Count() >= 2) {
 			PORTB ^= LED;
 			// Send back status + 2 bytes at once
 			USART_Transmit(GPIOR0);
 			for (u8 i = 0; i < 2; ++i) {
-				u8 tmp = USART_Read(0);
+				u8 tmp = USART_Read(1);
 				USART_Transmit(tmp);
 			}
 			USART_Discard(); // leftover bytes
 			GPIOR0 = 0;
 		}
+
+		counter++;
 	}
 
     return 0;

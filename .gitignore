@@ -3,6 +3,7 @@ apps/
 *.pdf
 
 # Generator files
+build/
 CMakeFiles/
 Makefile
 

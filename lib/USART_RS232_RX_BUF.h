@@ -13,5 +13,5 @@
 */
 
 u8 USART_Count();
-u8 USART_Read(u8 do_peek);
+u8 USART_Read(u8 do_advance);
 void USART_Discard();

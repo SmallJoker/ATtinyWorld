@@ -25,7 +25,7 @@ u8 USART_Count()
 	return num;
 }
 
-u8 USART_Read(u8 do_peek)
+u8 USART_Read(u8 do_advance)
 {
 	if (usart_rx.head == usart_rx.tail)
 		return 0; // Empty
@@ -34,7 +34,7 @@ u8 USART_Read(u8 do_peek)
 	if (newtail == USART_RX_BUFFER_SIZE)
 		newtail = 0;
 
-	if (!do_peek)
+	if (do_advance)
 		usart_rx.tail = newtail;
 	return usart_rx.data[newtail];
 }
