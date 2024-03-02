@@ -29,7 +29,7 @@ function(setup_avr_target TARGET_NAME)
 	add_custom_target("${TARGET_NAME}.hex"
 		COMMAND
 			${AVR_OBJCOPY} -O ihex "${TARGET_NAME}.elf" "${TARGET_NAME}.hex"
-		COMMAND
+		COMMAND # Show the program usage (code + RAM)
 			${AVR_SIZE} -C --mcu=${TYPE_GCC} "${TARGET_NAME}.elf" | grep "% "
 		DEPENDS "${TARGET_NAME}.elf"
 	)

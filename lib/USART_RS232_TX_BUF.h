@@ -19,6 +19,7 @@
 
 	Opt-in: USART_TX_BUFFER_SIZE (default: 5)
 		Custom TX buffer size
+		0 disables the buffer: -148 bytes code
 */
 
 
