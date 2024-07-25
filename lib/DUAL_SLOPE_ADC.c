@@ -20,7 +20,14 @@ static void my_delay(u16 count)
 
 u8 Dual_Slope_ADC_Read()
 {
-#define DELAY_FACTOR (0x60) // lower if R * C is faster
+	/* Delay factor: how long to wait for the ramp
+		0x90 works well for 330 nF * 39 kOhm
+		0x20 works well for 330 nF * 11 kOhm
+
+		Higher values are generally more accurate until the
+		ramp is close to the OPAMP rail voltage.
+	*/
+#define DELAY_FACTOR (0x20)
 
 	// 1: first ramp
 	u8 dir = !!(PINB & PINB_CTRL_0); // this input is more stable
@@ -33,9 +40,10 @@ u8 Dual_Slope_ADC_Read()
 	}
 	DDRB |= PINB_CTRL_0; // output
 
-	while (dir == !!(PINB & PINB_IN_0)) {
-		// wait. Compensation for comparator bias.
-	}
+	/*
+		The comparator might have a slight bias, but compensating it
+		restults in more jittery output at 50% voltage.
+	*/
 
 	u8 ramp1_t = 200;
 	// ^  >128 is needed for best precision
@@ -49,7 +57,8 @@ u8 Dual_Slope_ADC_Read()
 	while (1) {
 		if (dir == !!(PINB & PINB_IN_0))
 			break;
-		my_delay(1 * DELAY_FACTOR);
+		// Compensate clock cycles used by checks (try & error)
+		my_delay(1 * (DELAY_FACTOR - 2));
 		ramp2_t++;
 		if (!ramp2_t)
 			break;

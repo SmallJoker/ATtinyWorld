@@ -3,6 +3,9 @@ apps/
 _*
 *.pdf
 
+# Cache files
+*.dat.ngspice
+
 # Generator files
 build/
 CMakeFiles/
