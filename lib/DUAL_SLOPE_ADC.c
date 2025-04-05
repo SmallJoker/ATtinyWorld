@@ -20,14 +20,23 @@ static void my_delay(u16 count)
 
 u8 Dual_Slope_ADC_Read()
 {
-	/* Delay factor: how long to wait for the ramp
-		0x90 works well for 330 nF * 39 kOhm
-		0x20 works well for 330 nF * 11 kOhm
+	/*
+	DELAY_FACTOR: time interval of single steps
 
-		Higher values are generally more accurate until the
-		ramp is close to the OPAMP rail voltage.
+	RAMP1_STEPS: count of intervals to wait
+		A) Higher values give a better resolution
+		B) Must be <255 to allow ramp 2 to be longer (for Vin close to 50%)
+
+	Known good combinations:
+		0x90 & 128 works well for 330 nF * 39 kOhm
+		0x20 & 200 works well for 330 nF * 11 kOhm
+
+	Timing trade-off:
+		A) High amplitudes reduce input bias errors.
+		B) Low amplitudes allow faster sampling due to faster settle time.
 	*/
 #define DELAY_FACTOR (0x20)
+#define RAMP1_STEPS (200)
 
 	// 1: first ramp
 	u8 dir = !!(PINB & PINB_CTRL_0); // this input is more stable
@@ -40,15 +49,7 @@ u8 Dual_Slope_ADC_Read()
 	}
 	DDRB |= PINB_CTRL_0; // output
 
-	/*
-		The comparator might have a slight bias, but compensating it
-		restults in more jittery output at 50% voltage.
-	*/
-
-	u8 ramp1_t = 200;
-	// ^  >128 is needed for best precision
-	//    must be <255 to allow the 2nd ramp to be longer than the first (50% V)
-	my_delay(ramp1_t * DELAY_FACTOR);
+	my_delay(RAMP1_STEPS * DELAY_FACTOR);
 
 	// 2: second ramp until input voltage is reached
 	PORTB ^= PINB_CTRL_0;
@@ -81,8 +82,8 @@ u8 Dual_Slope_ADC_Read()
 		dir = 1  ->  V_charge = 255,  V_discharge =   0
 		dir = 0  ->  V_charge =   0,  V_discharge = 255
 	*/
-	u16 sum = (u16)ramp1_t + (u16)ramp2_t;
-	u16 val = ((u16)(dir ? ramp1_t : ramp2_t) * 255 + (sum / 2)) / sum;
+	u16 t_total = (u16)RAMP1_STEPS + (u16)ramp2_t;
+	u16 val = ((u16)(dir ? RAMP1_STEPS : ramp2_t) * 255 + (t_total / 2)) / t_total;
 	return val; // range [0, 255]
 }
 
@@ -90,7 +91,7 @@ void Dual_Slope_ADC_Setup()
 {
 	// All inputs by default
 
-	// Pull-ups disabled by default. Kept to keep the code up-to-date
+	// Pull-ups disabled by default. Do nothing.
 	if (0) {
 		PORTB &= ~PINB_CTRL_0;
 		PORTB &= ~PINB_IN_0;

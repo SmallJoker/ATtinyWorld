@@ -12,6 +12,9 @@ set(CMAKE_C_COMPILER   "${AVR_GCC}")
 set(CMAKE_CXX_COMPILER "${AVR_GPP}")
 set(CMAKE_BUILD_TYPE Release) # nothing else is supported so far
 
+set(CMAKE_C_FLAGS_RELEASE   "-Os -g")
+set(CMAKE_CXX_FLAGS_RELEASE "-Os -g")
+
 function(setup_avr_target TARGET_NAME)
 	# Compiler: https://gcc.gnu.org/onlinedocs/gcc/AVR-Options.html
 	#  -> Optimizations: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
@@ -21,7 +24,7 @@ function(setup_avr_target TARGET_NAME)
 		PROPERTIES
 			COMPILE_FlAGS "<--UNUSED-->"
 			# Maybe: -Wl,-Map=${TARGET_NAME}.map
-			LINK_FLAGS "-mmcu=${TYPE_GCC} -Wall -Os -Wl,--gc-sections -mrelax -mtiny-stack"
+			LINK_FLAGS "-mmcu=${TYPE_GCC} -Wall -Wl,--gc-sections -mrelax -mtiny-stack"
 	)
 
 	add_compile_definitions(${TYPE_MACRO})
