@@ -1,0 +1,8 @@
+# Created by KiCad
+controlpcb-Backups/
+
+fp-info-cache
+fp-lib-table
+
+# Output directory
+gerber/
