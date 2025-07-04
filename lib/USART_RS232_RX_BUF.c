@@ -4,27 +4,47 @@
 #include <avr/io.h>
 
 #ifndef USART_RX_BUFFER_SIZE
-	#define USART_RX_BUFFER_SIZE 5
+	#define missing USART_RX_BUFFER_SIZE macro
 #endif
 
-#ifndef USART_RX_DEVICEID
-	#error missing USART_RX_DEVICEID macro
+#if USART_RX_BUFFER_SIZE > 1
+	#define HAVE_BUFFER
 #endif
 
-#if USART_RX_BUFFER_SIZE < 1
-	#error USART_RX_BUFFER_SIZE must be >= 1
-#endif
+#ifdef HAVE_BUFFER
+	// Identification prefix bytes are only possible to detect when there's a buffer.
+	#ifndef USART_RX_DEVICEID
+		#error missing USART_RX_DEVICEID macro
+	#endif
 
 RINGBUFFER_NEW(usart_rx, USART_RX_BUFFER_SIZE)
+#endif
+
+#define USART_R_ERROR_FLAGS ((1 << FE) | (1 << DOR) | (1 << UPE))
 
 u8 USART_Count()
 {
+#ifdef HAVE_BUFFER
 	s8 num = usart_rx.head - usart_rx.tail;
 	if (num < 0)
 		num += USART_RX_BUFFER_SIZE;
 	return num;
+#endif
+	// else: 0 or 1
+	if (!(UCSRA & (1 << RXC)))
+		return 0; // No byte received-
+
+	if (UCSRA & USART_R_ERROR_FLAGS) {
+		// Read from register to clear RXC (Page 123)
+		// avr-gcc compiles the lines below into an `IN` instruction.
+		u8 discard = UDR;
+		(void)discard;
+		return 0;
+	}
+	return 1;
 }
 
+#ifdef HAVE_BUFFER
 u8 USART_Read(u8 do_advance)
 {
 	if (usart_rx.head == usart_rx.tail)
@@ -38,18 +58,23 @@ u8 USART_Read(u8 do_advance)
 		usart_rx.tail = newtail;
 	return usart_rx.data[newtail];
 }
+#endif
+// else: read from UDR directly to avoid function call overhead
 
+#ifdef HAVE_BUFFER
 void USART_Discard()
 {
 	usart_rx.head = usart_rx.tail;
 }
 
-
 ISR(USART_RX_vect)
 {
+	// "Due to the buffering of the error flags, the UCSRA
+	// must be read before the receive buffer (UDR)"
+	const u8 status = UCSRA;
 	u8 val = UDR;
 
-	if (UCSRA & ((1 << FE) | (1 << DOR) | (1 << UPE))) {
+	if (status & USART_R_ERROR_FLAGS) {
 		// Transmission error
 		USART_Discard();
 		return;
@@ -77,3 +102,5 @@ ISR(USART_RX_vect)
 	usart_rx.head = newhead;
 	usart_rx.data[newhead] = val;
 }
+#endif
+// if no buffer: use UDR directly.

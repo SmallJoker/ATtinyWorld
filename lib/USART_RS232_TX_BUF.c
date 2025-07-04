@@ -17,11 +17,7 @@ RINGBUFFER_NEW(usart_tx, USART_TX_BUFFER_SIZE)
 
 void USART_Transmit(u8 byte)
 {
-#ifndef HAVE_BUFFER
-	while (!(UCSRA & (1 << UDRE))); // wait
-	UDR = byte;
-	return;
-#else
+#ifdef HAVE_BUFFER
 	if (!(UCSRB & USART_T_BUSY)) {
 		// Tx is idling. Send instantly.
 		UCSRB |= USART_T_BUSY;
@@ -41,13 +37,18 @@ void USART_Transmit(u8 byte)
 	// !! "usart_tx.tail" must be volatile !!
 	while (newhead == usart_tx.tail);
 	usart_tx.data[usart_tx.head = newhead] = byte;
+	return;
 #endif
+	// else
+	while (!(UCSRA & (1 << UDRE))); // wait
+	UDR = byte;
 }
 
 #ifdef HAVE_BUFFER
 ISR(USART_TX_vect)
 {
-	// Flag cleared automatically (120)
+	// TXC is cleared automatically (Page 120)
+
 	if (usart_tx.head == usart_tx.tail) {
 		UCSRB &= ~USART_T_BUSY;
 		return; // Done. Disable interrupt
@@ -101,6 +102,10 @@ void USART_Setup()
 	// Tx & Rx Start
 	UCSRB |= 1 << TXEN // Tx start
 		| 1 << RXEN    // Rx start
-		| 1 << RXCIE;  // Rx interrupt
+#if USART_RX_BUFFER_SIZE > 0
+		| 1 << RXCIE   // Rx interrupt
+#endif
+	;
+
 	// Tx interrupt is set in USART_Transmit
 }

@@ -1,0 +1,11 @@
+
+build/
+
+# Automatically generated
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.elf
+*.hex
+
