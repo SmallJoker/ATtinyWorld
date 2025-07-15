@@ -19,6 +19,7 @@ enum ADC_Channel {
 // Moving average, 8 samples.
 extern u16 g_adc_values[ADCC_max];
 #endif
+extern u8 g_adc_values[ADCC_max];
 
 void PWM_ADC_Setup(void);
 void PWM_ADC_Start(enum ADC_Channel which);
