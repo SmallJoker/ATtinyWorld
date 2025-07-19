@@ -10,9 +10,12 @@
 // ------------------------------- Declarations
 
 enum {
-	ADC_VBAT_CRIT   = 100, // TODO critical low threshold
-	ADC_VBAT_40PERC = 120, // TODO 40% threshold
-	ADC_VBAT_FULL   = 130, // TODO (close to) 100%
+	ADC_VBAT_CRIT   = 0xD0, // TODO critical low threshold
+	// ^ 12.5 V = 0xD0 .5
+	ADC_VBAT_40PERC = 0xD7, // TODO 40% threshold
+	// ^ 13.0 V = 0xD7 .5
+	ADC_VBAT_FULL   = 0xE1, // TODO (close to) 100%
+	// ^ 13.6 V = 0xE0 .5
 };
 
 enum BatteryManagementStateMachine {
@@ -25,6 +28,7 @@ enum BatteryManagementStateMachine {
 	BMSM_EMERGENCY_TURN_OFF,
 	BMSM_EMERGENCY_TURN_OFF_2,
 
+	// Helper state
 	BMSM_HELPER_DELAY,
 } s_bmsm = BMSM_ENTRY, s_bmsm_delayed = BMSM_ENTRY;
 
@@ -123,15 +127,6 @@ ISR(PCINT_vect)
 
 // ------------------------------- State Machines, Helper functions
 
-static void adc_state_machine()
-{
-	// setup
-
-	// step
-
-	// report done
-}
-
 // Unused Timer 0 output B. This saves RAM and instruction bytes.
 #define delay_counter OCR0B
 
@@ -141,11 +136,6 @@ static enum StateMachineReturnValue statemachine()
 	//USART_Transmit(0xF0 + s_bmsm);
 	switch (s_bmsm) {
 		case BMSM_ENTRY:
-			if (PINB & PB_D_OUT_CONDUCTS) {
-				s_bmsm = BMSM_DISABLE_CHARGING;
-				break;
-			}
-
 			PWM_ADC_Start(ADCC_VBAT);
 			s_bmsm = BMSM_VBAT_CHECK;
 			break;
@@ -156,12 +146,13 @@ static enum StateMachineReturnValue statemachine()
 				break; // postpone
 
 			// Debug information
-			USART_Transmit(OCR0A);
+			//USART_Transmit(OCR0A);
 
 			if (OCR0A >= ADC_VBAT_40PERC)
 				PORTA |= PA_OUT_EN;
 
-			if (OCR0A >= ADC_VBAT_FULL) {
+			if ((PINB & PB_D_OUT_CONDUCTS) // is discharging
+					|| (OCR0A >= ADC_VBAT_FULL)) { // is full
 				s_bmsm = BMSM_DISABLE_CHARGING;
 				break;
 			}
@@ -179,7 +170,7 @@ static enum StateMachineReturnValue statemachine()
 			break;
 		case BMSM_CHECK_BATTERY_LOW:
 			// Battery voltage OK?
-			if (g_adc_values[ADCC_VBAT] > ADC_VBAT_CRIT) {
+			if (g_adc_values[ADCC_VBAT] >= ADC_VBAT_CRIT) {
 				s_bmsm = BMSM_KEEP_DISCHARGING;
 			} else {
 				s_bmsm = BMSM_EMERGENCY_TURN_OFF;
@@ -204,9 +195,11 @@ static enum StateMachineReturnValue statemachine()
 			// do nothing
 			return RV_RESET_AND_SLEEP;
 		case BMSM_EMERGENCY_TURN_OFF:
-			if (!(PORTA & PA_OUT_EN)) {
+			if (PORTA & PA_OUT_EN) {
 				// Turn off everything
 				PIND &= ~PD_DCDC_EN;
+				// make sure at least one arrives at the destination
+				USART_Transmit('X');
 				USART_Transmit('X');
 
 				s_bmsm = BMSM_HELPER_DELAY;
@@ -217,10 +210,16 @@ static enum StateMachineReturnValue statemachine()
 			}
 			break;
 		case BMSM_EMERGENCY_TURN_OFF_2:
+			// Cut all outgoing current
 			PORTA &= ~PA_OUT_EN;
 
 			// Sleep... until PB_D_IN_CONDUCTS goes to high?
-			return RV_RESET_AND_SLEEP;
+			// Let's hope there is again power available after a while of waiting.
+
+			s_bmsm = BMSM_HELPER_DELAY;
+			s_bmsm_delayed = BMSM_ENTRY;
+			delay_counter = 16; // 64 seconds (@ 4 seconds sleep interval)
+			break;
 		case BMSM_HELPER_DELAY:
 			// Used for long delays. Use Power-down cycles.
 			// FIXME: This does not work properly when woken up from sleep by interrupts
@@ -249,20 +248,33 @@ static void usart_rx_handler()
 		case 0x55:
 			sleep_requested = 1;
 			break;
-		case 0x56: // restart evaluation
+		case 0x56: // reset state machine
 			s_bmsm = BMSM_ENTRY;
 			break;
 		case 0x80: // State machine status request
 			v = s_bmsm;
 			break;
+		case 0x81: // Status request
+			v = (0
+				// Sensors
+				| !!(PORTB & PB_D_OUT_CONDUCTS) << 0 // battery discharging?
+				| !!(PORTB & PB_D_IN_CONDUCTS) << 1  // input voltage present?
+				// Actors
+				| !!(PORTD & PD_DCDC_EN) << 4  // is charger ON?
+				| !!(PORTA & PA_OUT_EN) << 5
+				| !!(PORTA & PA_FAN_EN) << 6   // cooling/debug
+			);
+			break;
 		case 0x90:
 		case 0x91:
 		case 0x92: // Get ADC values
-			v = g_adc_values[v - 0x60];
+			v = g_adc_values[v - 0x90];
 			break;
+		default:
+			return; // no reply
 	}
 
-	// Basic communication test (echo)
+	USART_Transmit('>'); // anchor
 	USART_Transmit(v);
 }
 
@@ -309,7 +321,6 @@ int main()
 
 	USART_Transmit('!'); // START
 
-	uint8_t counter = 0;
 	while (1) {
 		{
 			// Periodic execution. Wait for next cycle.
@@ -337,20 +348,8 @@ int main()
 				break;
 		}
 
-		if (counter == 0) {
-			PINA = PA_DBG_LED; // blink :)
-		}
+		PINA = PA_DBG_LED; // blink :)
 
 		usart_rx_handler();
-
-		if ((counter & 0xF) == 0x000) {
-			_Bool done = PWM_ADC_Step(ADCC_VBAT);
-			if (done)
-				USART_Transmit(OCR0A);
-		}
-
-		counter++;
-		if (counter == 0x1F)
-			counter = 0;
 	}
 }
