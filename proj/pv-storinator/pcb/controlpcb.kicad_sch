@@ -6,8 +6,8 @@
 	(paper "A3" portrait)
 	(title_block
 		(title "controlpcb Controller")
-		(date "2025-07-02")
-		(rev "2")
+		(date "2025-07-19")
+		(rev "5")
 	)
 	(lib_symbols
 		(symbol "Amplifier_Operational:LM358"
@@ -3779,6 +3779,30 @@
 		)
 		(uuid "2764efde-ef1f-4ff9-8225-6d7c8561043c")
 	)
+	(text "Use a zip tie or an insulated\nwire to hold the cables in place."
+		(exclude_from_sim no)
+		(at 254.762 149.098 0)
+		(effects
+			(font
+				(face "DejaVu Sans")
+				(size 1.5 1.5)
+				(italic yes)
+			)
+		)
+		(uuid "4f4d4fce-4ec6-4584-ad21-15df444cb081")
+	)
+	(text "F1 must be slow-acting\nto prevent blow up when\nC1 needs to be charged."
+		(exclude_from_sim no)
+		(at 265.684 98.044 0)
+		(effects
+			(font
+				(face "DejaVu Sans")
+				(size 1.5 1.5)
+				(italic yes)
+			)
+		)
+		(uuid "5412a036-1282-4bdf-b67b-9a7157b1ade2")
+	)
 	(text "GND\nON?\n-\n-\nK\nA"
 		(exclude_from_sim no)
 		(at 73.406 20.32 0)
@@ -3793,7 +3817,7 @@
 	)
 	(text "Rechargeable Battery"
 		(exclude_from_sim no)
-		(at 264.922 96.012 0)
+		(at 260.604 90.678 0)
 		(effects
 			(font
 				(face "DejaVu Sans")
@@ -3874,7 +3898,7 @@
 	)
 	(text "Battery Voltage\nMeasurement"
 		(exclude_from_sim no)
-		(at 224.028 115.824 0)
+		(at 215.138 115.824 0)
 		(effects
 			(font
 				(face "DejaVu Sans")
@@ -3926,6 +3950,17 @@
 			)
 		)
 		(uuid "bc1235d9-1a53-42f8-bd12-eaf4c3620b4b")
+	)
+	(text "Cable fixation holes"
+		(exclude_from_sim no)
+		(at 255.016 144.018 0)
+		(effects
+			(font
+				(face "DejaVu Sans")
+				(size 2 2)
+			)
+		)
+		(uuid "e6bd5e22-ae7e-4f44-a9b7-567edeb39f5e")
 	)
 	(text "Alternative: Direct\ndrive from MCU.\nuse jumper wire"
 		(exclude_from_sim no)
@@ -4006,7 +4041,7 @@
 		(uuid "498cd1de-9d81-471e-aaa8-1a742a65ce89")
 	)
 	(junction
-		(at 208.28 130.81)
+		(at 199.39 130.81)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4dc31bbb-82ab-4bfc-b7d5-6570c3f33f64")
@@ -4016,12 +4051,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "536f8420-aebf-4ce6-a6d1-0cd9cca3f515")
-	)
-	(junction
-		(at 208.28 106.68)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "563d7388-c867-4fd5-9018-473d502fe865")
 	)
 	(junction
 		(at 97.79 38.1)
@@ -4072,7 +4101,7 @@
 		(uuid "a2afe741-9a17-4e2d-ba85-72422ed39d00")
 	)
 	(junction
-		(at 219.71 130.81)
+		(at 210.82 130.81)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a71a27f3-7c76-4526-8518-73d3abcdc0a1")
@@ -4100,6 +4129,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d288a03f-5f74-4319-8243-8aff517d7d96")
+	)
+	(junction
+		(at 199.39 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d59ca2c1-6509-48af-b9cc-9dfda5c4bd6b")
 	)
 	(junction
 		(at 63.5 82.55)
@@ -4219,7 +4254,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 130.81) (xy 226.06 130.81)
+			(xy 210.82 130.81) (xy 217.17 130.81)
 		)
 		(stroke
 			(width 0)
@@ -4309,7 +4344,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 119.38) (xy 255.27 110.49)
+			(xy 252.73 119.38) (xy 252.73 110.49)
 		)
 		(stroke
 			(width 0)
@@ -4379,7 +4414,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 140.97) (xy 219.71 143.51)
+			(xy 210.82 140.97) (xy 210.82 143.51)
 		)
 		(stroke
 			(width 0)
@@ -4569,6 +4604,16 @@
 	)
 	(wire
 		(pts
+			(xy 199.39 106.68) (xy 179.07 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4fe69c4c-960e-442a-8d20-f42a893938d7")
+	)
+	(wire
+		(pts
 			(xy 60.96 189.23) (xy 58.42 189.23)
 		)
 		(stroke
@@ -4599,7 +4644,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 139.7) (xy 208.28 143.51)
+			(xy 199.39 139.7) (xy 199.39 143.51)
 		)
 		(stroke
 			(width 0)
@@ -4739,7 +4784,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 120.65) (xy 208.28 106.68)
+			(xy 199.39 120.65) (xy 199.39 106.68)
 		)
 		(stroke
 			(width 0)
@@ -4769,7 +4814,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 130.81) (xy 208.28 128.27)
+			(xy 199.39 130.81) (xy 199.39 128.27)
 		)
 		(stroke
 			(width 0)
@@ -4789,17 +4834,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 106.68) (xy 238.76 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78e74b77-c323-424f-af6a-bba459e7e7ac")
-	)
-	(wire
-		(pts
-			(xy 255.27 110.49) (xy 264.16 110.49)
+			(xy 252.73 110.49) (xy 261.62 110.49)
 		)
 		(stroke
 			(width 0)
@@ -5089,23 +5124,13 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 133.35) (xy 219.71 130.81)
+			(xy 210.82 133.35) (xy 210.82 130.81)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "a5f8c8b7-d100-4ba0-893e-9ae3e7d493dc")
-	)
-	(wire
-		(pts
-			(xy 208.28 106.68) (xy 179.07 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a75d35cc-dc5b-4c89-a73c-97ee6a456712")
 	)
 	(wire
 		(pts
@@ -5189,13 +5214,23 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 106.68) (xy 246.38 106.68)
+			(xy 238.76 106.68) (xy 243.84 106.68)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "b643d54a-91c9-46a6-9538-727e07e07286")
+	)
+	(wire
+		(pts
+			(xy 199.39 106.68) (xy 238.76 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8ba70d6-c239-4cbd-80bc-d13305607def")
 	)
 	(wire
 		(pts
@@ -5359,7 +5394,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 106.68) (xy 264.16 106.68)
+			(xy 251.46 106.68) (xy 261.62 106.68)
 		)
 		(stroke
 			(width 0)
@@ -5389,7 +5424,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 132.08) (xy 208.28 130.81)
+			(xy 199.39 132.08) (xy 199.39 130.81)
 		)
 		(stroke
 			(width 0)
@@ -5439,7 +5474,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 130.81) (xy 219.71 130.81)
+			(xy 199.39 130.81) (xy 210.82 130.81)
 		)
 		(stroke
 			(width 0)
@@ -5598,7 +5633,7 @@
 		(uuid "3c074a63-71b4-4e41-a4c5-597a7988380f")
 	)
 	(label "V_BAT_R"
-		(at 255.27 106.68 0)
+		(at 252.73 106.68 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5691,7 +5726,7 @@
 	)
 	(global_label "VBAT_COMP_P"
 		(shape output)
-		(at 226.06 130.81 0)
+		(at 217.17 130.81 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5701,7 +5736,7 @@
 		)
 		(uuid "139823f8-39d8-457e-b4af-552ebbe3a691")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 241.9871 130.81 0)
+			(at 233.0971 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7063,7 +7098,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Custom_Footprints:SolderWire_D1.3mm_OD2.6mm"
+		(property "Footprint" "Connector_Wire:SolderWire-0.75sqmm_1x01_D1.25mm_OD2.3mm"
 			(at 29.21 38.1 0)
 			(effects
 				(font
@@ -7684,7 +7719,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100k"
+		(property "Value" "47k"
 			(at 167.64 132.0799 0)
 			(effects
 				(font
@@ -8454,7 +8489,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Custom_Footprints:SolderWire_D1.3mm_OD2.6mm"
+		(property "Footprint" "Connector_Wire:SolderWire-0.75sqmm_1x01_D1.25mm_OD2.3mm"
 			(at 29.21 34.29 0)
 			(effects
 				(font
@@ -10338,7 +10373,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 255.27 119.38 0)
+		(at 252.73 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10347,7 +10382,7 @@
 		(fields_autoplaced yes)
 		(uuid "7dbf597f-3c71-4ac3-bd13-b0e1c5a6d85c")
 		(property "Reference" "#PWR012"
-			(at 255.27 125.73 0)
+			(at 252.73 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10356,7 +10391,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 255.27 124.46 0)
+			(at 252.73 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10364,7 +10399,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 255.27 119.38 0)
+			(at 252.73 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10373,7 +10408,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 255.27 119.38 0)
+			(at 252.73 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10382,7 +10417,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 255.27 119.38 0)
+			(at 252.73 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10820,6 +10855,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 24.13 53.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "88e35981-db40-4b87-ad64-138fc819077e")
+		(property "Reference" "H8"
+			(at 26.67 52.0699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 26.67 54.6099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965"
+			(at 24.13 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 24.13 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 24.13 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "controlpcb"
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "H8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 52.07 74.93 0)
 		(mirror y)
@@ -11169,7 +11268,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x01")
-		(at 269.24 110.49 0)
+		(at 266.7 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11178,7 +11277,7 @@
 		(fields_autoplaced yes)
 		(uuid "92ffc446-cee0-4721-93ad-95f0164215ff")
 		(property "Reference" "J15"
-			(at 271.78 109.2199 0)
+			(at 269.24 109.2199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11187,7 +11286,7 @@
 			)
 		)
 		(property "Value" "Conn_01x01"
-			(at 271.78 111.7599 0)
+			(at 269.24 111.7599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11197,7 +11296,7 @@
 			)
 		)
 		(property "Footprint" "Connector_Wire:SolderWire-0.75sqmm_1x01_D1.25mm_OD2.3mm"
-			(at 269.24 110.49 0)
+			(at 266.7 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11206,7 +11305,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 269.24 110.49 0)
+			(at 266.7 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11215,7 +11314,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 269.24 110.49 0)
+			(at 266.7 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11373,7 +11472,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 208.28 143.51 0)
+		(at 199.39 143.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11382,7 +11481,7 @@
 		(fields_autoplaced yes)
 		(uuid "9707261e-8714-4291-8ef8-3d1534932239")
 		(property "Reference" "#PWR017"
-			(at 208.28 149.86 0)
+			(at 199.39 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11391,7 +11490,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 208.28 148.59 0)
+			(at 199.39 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11399,7 +11498,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 208.28 143.51 0)
+			(at 199.39 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11408,7 +11507,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 208.28 143.51 0)
+			(at 199.39 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11417,7 +11516,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 208.28 143.51 0)
+			(at 199.39 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11726,7 +11825,7 @@
 	)
 	(symbol
 		(lib_id "Device:Fuse")
-		(at 250.19 106.68 90)
+		(at 247.65 106.68 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11734,7 +11833,7 @@
 		(dnp no)
 		(uuid "a06ad61b-a902-4b0a-91c2-0e1d12a3a611")
 		(property "Reference" "F1"
-			(at 250.19 100.33 90)
+			(at 247.65 100.33 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11742,7 +11841,7 @@
 			)
 		)
 		(property "Value" "Fuse"
-			(at 250.19 102.87 90)
+			(at 247.65 102.87 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11750,7 +11849,7 @@
 			)
 		)
 		(property "Footprint" "Fuse:Fuseholder_Clip-5x20mm_Littelfuse_445-030_Inline_P20.50x5.20mm_D1.30mm_Horizontal"
-			(at 250.19 108.458 90)
+			(at 247.65 108.458 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11759,7 +11858,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 250.19 106.68 0)
+			(at 247.65 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11768,7 +11867,7 @@
 			)
 		)
 		(property "Description" "Fuse"
-			(at 250.19 106.68 0)
+			(at 247.65 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12130,7 +12229,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 219.71 143.51 0)
+		(at 210.82 143.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12139,7 +12238,7 @@
 		(fields_autoplaced yes)
 		(uuid "acd9fccb-70e6-45d7-b1f1-0ac0e6164989")
 		(property "Reference" "#PWR018"
-			(at 219.71 149.86 0)
+			(at 210.82 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12148,7 +12247,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 219.71 148.59 0)
+			(at 210.82 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12156,7 +12255,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 219.71 143.51 0)
+			(at 210.82 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12165,7 +12264,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 219.71 143.51 0)
+			(at 210.82 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12174,7 +12273,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 219.71 143.51 0)
+			(at 210.82 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12189,6 +12288,70 @@
 			(project "controlpcb"
 				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
 					(reference "#PWR018")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 247.65 154.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b4301923-2059-45b6-bc1f-814cdc2462d3")
+		(property "Reference" "H9"
+			(at 250.19 153.6699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 250.19 156.2099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965"
+			(at 247.65 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 247.65 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 247.65 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "controlpcb"
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "H9")
 					(unit 1)
 				)
 			)
@@ -12363,7 +12526,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 208.28 124.46 0)
+		(at 199.39 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12371,7 +12534,7 @@
 		(dnp no)
 		(uuid "ba69728a-d03e-4c9f-a304-42c79a2824a5")
 		(property "Reference" "R4"
-			(at 210.82 123.1899 0)
+			(at 201.93 123.1899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12380,7 +12543,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 210.82 125.7299 0)
+			(at 201.93 125.7299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12389,7 +12552,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
-			(at 206.502 124.46 90)
+			(at 197.612 124.46 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12398,7 +12561,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 208.28 124.46 0)
+			(at 199.39 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12407,7 +12570,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 208.28 124.46 0)
+			(at 199.39 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12502,7 +12665,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x01")
-		(at 269.24 106.68 0)
+		(at 266.7 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12511,7 +12674,7 @@
 		(fields_autoplaced yes)
 		(uuid "bfd295f7-2724-43f3-baa0-5557e0f033d6")
 		(property "Reference" "J14"
-			(at 271.78 105.4099 0)
+			(at 269.24 105.4099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12520,7 +12683,7 @@
 			)
 		)
 		(property "Value" "Conn_01x01"
-			(at 271.78 107.9499 0)
+			(at 269.24 107.9499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12530,7 +12693,7 @@
 			)
 		)
 		(property "Footprint" "Connector_Wire:SolderWire-0.75sqmm_1x01_D1.25mm_OD2.3mm"
-			(at 269.24 106.68 0)
+			(at 266.7 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12539,7 +12702,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 269.24 106.68 0)
+			(at 266.7 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12548,7 +12711,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 269.24 106.68 0)
+			(at 266.7 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12669,7 +12832,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 208.28 135.89 0)
+		(at 199.39 135.89 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12678,7 +12841,7 @@
 		(fields_autoplaced yes)
 		(uuid "c0a399b8-9d1d-43c4-a8c2-e1bff41064eb")
 		(property "Reference" "R6"
-			(at 210.82 134.6199 0)
+			(at 201.93 134.6199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12686,8 +12849,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "68k"
-			(at 210.82 137.1599 0)
+		(property "Value" "47k"
+			(at 201.93 137.1599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12696,7 +12859,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical"
-			(at 206.502 135.89 90)
+			(at 197.612 135.89 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12705,7 +12868,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 208.28 135.89 0)
+			(at 199.39 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12714,7 +12877,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 208.28 135.89 0)
+			(at 199.39 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13040,7 +13203,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 219.71 137.16 0)
+		(at 210.82 137.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13049,7 +13212,7 @@
 		(fields_autoplaced yes)
 		(uuid "d5367014-0294-4d50-9e9d-36cf5a556a6a")
 		(property "Reference" "C5"
-			(at 223.52 135.8899 0)
+			(at 214.63 135.8899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13058,7 +13221,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 223.52 138.4299 0)
+			(at 214.63 138.4299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13067,7 +13230,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 220.6752 140.97 0)
+			(at 211.7852 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13076,7 +13239,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 219.71 137.16 0)
+			(at 210.82 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13085,7 +13248,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 219.71 137.16 0)
+			(at 210.82 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13178,6 +13341,70 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
+		(at 24.13 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "def49556-6dfe-4523-8313-d42df3c2574c")
+		(property "Reference" "H7"
+			(at 26.67 46.9899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 26.67 49.5299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965"
+			(at 24.13 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 24.13 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 24.13 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "controlpcb"
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "H7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
 		(at 24.13 95.25 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13235,6 +13462,70 @@
 			(project ""
 				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
 					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 247.65 160.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e22e39c2-8471-4855-8072-c22115b80537")
+		(property "Reference" "H10"
+			(at 250.19 158.7499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 250.19 161.2899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_DIN965"
+			(at 247.65 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 247.65 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 247.65 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "controlpcb"
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "H10")
 					(unit 1)
 				)
 			)
