@@ -27,6 +27,7 @@ static u8 counter;
 void PWM_ADC_Start(enum ADC_Channel which)
 {
 	ACSR &= ~(1 << ACD); // enable comparator
+	PORTD &= ~PD_nOPAMP_ON; // prevent powering the aux. OPAMP using our PWM.
 
 	counter = 0;
 	OCR0A = g_adc_values[which] - 4; // try to approach from the bottom
@@ -70,6 +71,7 @@ done:
 #endif
 		g_adc_values[which] = OCR0A;
 		DDRB &= ~PB_PWM_0A; // stop PWM output
+		PORTD |= PD_nOPAMP_ON; // reduce energy consumption
 		return 1;
 	}
 	return 0;

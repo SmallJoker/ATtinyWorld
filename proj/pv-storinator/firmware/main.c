@@ -10,12 +10,12 @@
 // ------------------------------- Declarations
 
 enum {
-	ADC_VBAT_CRIT   = 0xD0, // TODO critical low threshold
-	// ^ 12.5 V = 0xD0 .5
-	ADC_VBAT_40PERC = 0xD7, // TODO 40% threshold
-	// ^ 13.0 V = 0xD7 .5
-	ADC_VBAT_FULL   = 0xE1, // TODO (close to) 100%
-	// ^ 13.6 V = 0xE0 .5
+	ADC_VBAT_CRIT   = 0xC9, // TODO critical low threshold
+	// ^ 12.5 V
+	ADC_VBAT_40PERC = 0xD1, // TODO 40% threshold
+	// ^ 13.0 V
+	ADC_VBAT_FULL   = 0xDB, // TODO (close to) 100%
+	// ^ 13.6 V
 };
 
 enum BatteryManagementStateMachine {
