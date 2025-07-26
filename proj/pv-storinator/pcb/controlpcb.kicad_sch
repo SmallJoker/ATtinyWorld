@@ -5,9 +5,9 @@
 	(uuid "9770740f-e870-41f2-b9d5-05257db4c1c2")
 	(paper "A3" portrait)
 	(title_block
-		(title "controlpcb Controller")
-		(date "2025-07-19")
-		(rev "5")
+		(title "controlpcb")
+		(date "2025-07-26")
+		(rev "6")
 	)
 	(lib_symbols
 		(symbol "Amplifier_Operational:LM358"
@@ -2586,6 +2586,143 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Regulator_Linear:AP7381-50SA-7"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -3.81 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "AP7381-50SA-7"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP7381.pdf"
+				(at 0 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "150mA Low Dropout Voltage Regulator, Fixed Output 5.0V, Wide Input Voltage Range 40V, SOT-23"
+				(at 0 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Diodes ldo"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "AP7381-50SA-7_0_1"
+				(rectangle
+					(start -5.08 1.905)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "AP7381-50SA-7_1_1"
+				(pin power_in line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "VI"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "VO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Regulator_Linear:L78L05_TO92"
 			(pin_names
 				(offset 0.254)
@@ -3176,6 +3313,293 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Transistor_FET:Q_NMOS_GSD"
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Q"
+				(at 5.08 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "Q_NMOS_GSD"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "N-MOSFET transistor, gate/source/drain"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "transistor NMOS N-MOS N-MOSFET"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Q_NMOS_GSD_0_1"
+				(polyline
+					(pts
+						(xy 0.254 1.905) (xy 0.254 -1.905)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.254 0) (xy -2.54 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 2.286) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 0.508) (xy 0.762 -0.508)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.27) (xy 0.762 -2.286)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.778) (xy 3.302 -1.778) (xy 3.302 1.778) (xy 0.762 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0) (xy 2.032 0.381) (xy 2.032 -0.381) (xy 1.016 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 1.651 0)
+					(radius 2.794)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54) (xy 2.54 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.921 0.381) (xy 3.683 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.302 0.381) (xy 2.921 -0.254) (xy 3.683 -0.254) (xy 3.302 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Q_NMOS_GSD_1_1"
+				(pin input line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "G"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 -5.08 90)
+					(length 2.54)
+					(name "S"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Transistor_FET:Q_PMOS_GSD"
 			(pin_names
 				(offset 0)
@@ -3746,6 +4170,17 @@
 		)
 		(uuid "226d1733-5bef-478a-a489-7536e8c153b3")
 	)
+	(text "U1_2 fits on the TO-92 footprint\nwhen soldering manually"
+		(exclude_from_sim no)
+		(at 86.106 137.668 0)
+		(effects
+			(font
+				(face "DejaVu Sans")
+				(size 2 2)
+			)
+		)
+		(uuid "2428d8d4-ae70-4efe-b423-f71d848ea906")
+	)
 	(text "Fan / Cooler"
 		(exclude_from_sim no)
 		(at 83.058 324.104 0)
@@ -3767,6 +4202,17 @@
 			)
 		)
 		(uuid "258b181f-b909-440e-b6b5-cfdb090eef89")
+	)
+	(text "Q4_2 fits on the TO-92 footprint\nwhen soldering manually"
+		(exclude_from_sim no)
+		(at 125.984 354.33 0)
+		(effects
+			(font
+				(face "DejaVu Sans")
+				(size 2 2)
+			)
+		)
+		(uuid "275d78a1-e1d0-4810-9a2a-44352a271b3e")
 	)
 	(text "Current Sense"
 		(exclude_from_sim no)
@@ -3848,6 +4294,18 @@
 			(justify right top)
 		)
 		(uuid "77348a93-48b5-4071-a26c-816e013a1f41")
+	)
+	(text "R1: Force low in case\nthe MCU has a failure."
+		(exclude_from_sim no)
+		(at 109.728 70.866 0)
+		(effects
+			(font
+				(face "DejaVu Sans")
+				(size 1.5 1.5)
+				(italic yes)
+			)
+		)
+		(uuid "7bbcb028-6fdc-4457-88dc-69d551b92630")
 	)
 	(text "COMP+\nCOMP-\nOC0A\nPCINT\nPCINT\nDBG\nDBG\nDBG"
 		(exclude_from_sim no)
@@ -3975,6 +4433,12 @@
 		(uuid "fa781096-b944-4dbf-935e-8022302c0bdd")
 	)
 	(junction
+		(at 100.33 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "013d8541-b0c4-4e38-848f-5123684ce86d")
+	)
+	(junction
 		(at 205.74 290.83)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3985,6 +4449,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0e8f51eb-865d-4d53-b4a0-e4de7d4df9aa")
+	)
+	(junction
+		(at 77.47 118.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "11abc284-f47c-48d6-8416-82cc12ee4934")
 	)
 	(junction
 		(at 76.2 82.55)
@@ -3999,6 +4469,12 @@
 		(uuid "1541dc18-a1ee-417f-96b2-be6efde193f7")
 	)
 	(junction
+		(at 96.52 336.55)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1542e194-4e3a-46d6-bdb7-8ea45cf42ff7")
+	)
+	(junction
 		(at 195.58 250.19)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4009,6 +4485,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2c464253-7376-471c-af39-363cc750f79e")
+	)
+	(junction
+		(at 88.9 341.63)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2e0d7384-4094-43d2-9b60-377ee12ba36b")
 	)
 	(junction
 		(at 101.6 118.11)
@@ -4113,6 +4595,12 @@
 		(uuid "b16113b1-2441-45b5-987d-9b1338a38543")
 	)
 	(junction
+		(at 96.52 118.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bc90ae5d-eee2-4847-bacf-166a0e1fb961")
+	)
+	(junction
 		(at 165.1 134.62)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4123,6 +4611,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c4dae5e5-76c7-4fa0-b67d-1d3363273562")
+	)
+	(junction
+		(at 96.52 346.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c523abe7-ac4d-4267-a522-3b6711979fd1")
 	)
 	(junction
 		(at 116.84 53.34)
@@ -4201,16 +4695,6 @@
 			(type default)
 		)
 		(uuid "06053f0b-2a85-4f8e-a7d9-a35a6e9a7f57")
-	)
-	(wire
-		(pts
-			(xy 87.63 53.34) (xy 116.84 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "06b43437-be4d-4afd-a0d6-70dd1927fadf")
 	)
 	(wire
 		(pts
@@ -4304,6 +4788,16 @@
 	)
 	(wire
 		(pts
+			(xy 80.01 99.06) (xy 77.47 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "119ddda7-c68f-494f-b41f-67cff7e89d18")
+	)
+	(wire
+		(pts
 			(xy 135.89 171.45) (xy 123.19 171.45)
 		)
 		(stroke
@@ -4331,6 +4825,16 @@
 			(type default)
 		)
 		(uuid "162f0025-7405-4e27-8fcb-28783c50dc77")
+	)
+	(wire
+		(pts
+			(xy 96.52 99.06) (xy 96.52 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17350785-a768-41ea-8cbd-e289394fbda1")
 	)
 	(wire
 		(pts
@@ -4434,6 +4938,16 @@
 	)
 	(wire
 		(pts
+			(xy 110.49 346.71) (xy 96.52 346.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a70e5d5-ba10-43f3-98f8-d528f676d361")
+	)
+	(wire
+		(pts
 			(xy 142.24 283.21) (xy 99.06 283.21)
 		)
 		(stroke
@@ -4481,6 +4995,16 @@
 			(type default)
 		)
 		(uuid "3258ae03-7cda-463e-b4ac-95afa34df213")
+	)
+	(wire
+		(pts
+			(xy 100.33 53.34) (xy 116.84 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "33d16e74-916f-4946-a6ba-222d119f96aa")
 	)
 	(wire
 		(pts
@@ -4704,6 +5228,16 @@
 	)
 	(wire
 		(pts
+			(xy 96.52 118.11) (xy 101.6 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "669a7b1b-4180-4418-9f0b-6d1e634e17e9")
+	)
+	(wire
+		(pts
 			(xy 63.5 82.55) (xy 63.5 78.74)
 		)
 		(stroke
@@ -4884,6 +5418,16 @@
 	)
 	(wire
 		(pts
+			(xy 110.49 336.55) (xy 96.52 336.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "83f37659-ccdb-4987-a936-93067b5f5963")
+	)
+	(wire
+		(pts
 			(xy 87.63 53.34) (xy 87.63 55.88)
 		)
 		(stroke
@@ -5054,6 +5598,16 @@
 	)
 	(wire
 		(pts
+			(xy 87.63 53.34) (xy 100.33 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "99c4ec37-3d68-4aaf-b075-935962a45991")
+	)
+	(wire
+		(pts
 			(xy 113.03 288.29) (xy 99.06 288.29)
 		)
 		(stroke
@@ -5111,6 +5665,16 @@
 			(type default)
 		)
 		(uuid "a0575cb4-1a4e-4667-9605-2def9d76c0f9")
+	)
+	(wire
+		(pts
+			(xy 77.47 99.06) (xy 77.47 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1d00001-e0eb-4826-8301-5bce7cd82a7b")
 	)
 	(wire
 		(pts
@@ -5174,7 +5738,17 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 118.11) (xy 80.01 118.11)
+			(xy 102.87 341.63) (xy 88.9 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b090e174-0aa2-4bfc-b4cf-4ca732a27085")
+	)
+	(wire
+		(pts
+			(xy 71.12 118.11) (xy 77.47 118.11)
 		)
 		(stroke
 			(width 0)
@@ -5254,6 +5828,16 @@
 	)
 	(wire
 		(pts
+			(xy 77.47 118.11) (xy 80.01 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be35ca4e-387b-486b-9a8f-a2b358b7c5dd")
+	)
+	(wire
+		(pts
 			(xy 68.58 74.93) (xy 68.58 82.55)
 		)
 		(stroke
@@ -5314,7 +5898,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 118.11) (xy 101.6 118.11)
+			(xy 95.25 118.11) (xy 96.52 118.11)
 		)
 		(stroke
 			(width 0)
@@ -5561,6 +6145,16 @@
 			(type default)
 		)
 		(uuid "f831b383-7f4f-48dd-84b0-3c7731539763")
+	)
+	(wire
+		(pts
+			(xy 95.25 99.06) (xy 96.52 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbe5690e-6aaa-4fc8-a216-ce473f56909e")
 	)
 	(wire
 		(pts
@@ -6643,6 +7237,145 @@
 			(project "controlpcb"
 				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
 					(reference "#PWR034")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 100.33 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0785026f-1e59-471d-87ee-e91226b3c197")
+		(property "Reference" "#PWR06"
+			(at 100.33 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 100.33 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 100.33 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 100.33 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 100.33 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "42a066a3-5e8a-4525-9c3c-f770a5cef227")
+		)
+		(instances
+			(project "controlpcb"
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:Q_NMOS_GSD")
+		(at 107.95 341.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "08084bb4-c8dc-4c97-bacb-2b43ba37ff75")
+		(property "Reference" "Q4_2"
+			(at 114.3 340.3599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BSS316N / PJA3432 / DMG3406L / ?"
+			(at 114.3 342.8999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 113.03 339.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 107.95 341.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Vds >= 30 V, Rds_on < 300 mOhm"
+			(at 107.95 341.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "42c19b5d-e6df-4d51-a2ee-15f5531225e6")
+		)
+		(pin "2"
+			(uuid "90397711-a6ca-4727-9761-71ba0a585c9a")
+		)
+		(pin "1"
+			(uuid "8651abc4-bc47-4c04-95f9-fff6652f4d93")
+		)
+		(instances
+			(project ""
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "Q4_2")
 					(unit 1)
 				)
 			)
@@ -8246,6 +8979,77 @@
 			(project "controlpcb"
 				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
 					(reference "#PWR014")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Regulator_Linear:AP7381-50SA-7")
+		(at 87.63 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "2d20ca7f-f943-4eba-a0dc-b133d2c56ab5")
+		(property "Reference" "U1_2"
+			(at 87.63 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AP7381-50SA-7"
+			(at 87.63 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 87.63 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP7381.pdf"
+			(at 87.63 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "150mA Low Dropout Voltage Regulator, Fixed Output 5.0V, Wide Input Voltage Range 40V, SOT-23"
+			(at 87.63 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "29ebb412-a2ea-4d40-af48-a8fd61799a5e")
+		)
+		(pin "3"
+			(uuid "9120793a-378c-41a2-845b-71167ab277bb")
+		)
+		(pin "1"
+			(uuid "0e7767c5-763f-4a5b-ad91-f63ddfaa4dcf")
+		)
+		(instances
+			(project ""
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "U1_2")
 					(unit 1)
 				)
 			)
@@ -10919,6 +11723,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 100.33 57.15 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "894cb18e-f797-4fb0-92cf-c90579839705")
+		(property "Reference" "R1"
+			(at 102.87 55.8799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22k"
+			(at 102.87 58.4199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 98.552 57.15 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 100.33 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 100.33 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "3d8fb608-7a6e-4ccc-a7db-f808305ad0cf")
+		)
+		(pin "1"
+			(uuid "4a943529-b585-4389-a226-9d5f9de02a2e")
+		)
+		(instances
+			(project "controlpcb"
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 52.07 74.93 0)
 		(mirror y)
@@ -12366,7 +13240,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b9c21041-c351-47bc-94a9-c8259c4db3e9")
-		(property "Reference" "Q4"
+		(property "Reference" "Q4_1"
 			(at 99.06 340.3599 0)
 			(effects
 				(font
@@ -12450,7 +13324,7 @@
 		(instances
 			(project "controlpcb"
 				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
-					(reference "Q4")
+					(reference "Q4_1")
 					(unit 1)
 				)
 			)
@@ -13272,6 +14146,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 87.63 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d9e2a9e8-047f-425c-970b-b6481e87a74a")
+		(property "Reference" "#PWR05"
+			(at 87.63 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 91.44 108.458 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 87.63 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 87.63 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 87.63 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5d86cbea-f17a-433a-be0c-cde026b8b6df")
+		)
+		(instances
+			(project "controlpcb"
+				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
+					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_01x01")
 		(at 255.27 38.1 0)
 		(unit 1)
@@ -13872,9 +14811,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "f1255240-a486-4a3e-b62b-bf9b359d4565")
-		(property "Reference" "U1"
+		(property "Reference" "U1_1"
 			(at 87.63 111.76 0)
 			(effects
 				(font
@@ -13882,7 +14820,7 @@
 				)
 			)
 		)
-		(property "Value" "L78L05_TO92"
+		(property "Value" "AP7381-50V-A"
 			(at 87.63 114.3 0)
 			(effects
 				(font
@@ -13900,7 +14838,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://www.st.com/content/ccc/resource/technical/document/datasheet/15/55/e5/aa/23/5b/43/fd/CD00000446.pdf/files/CD00000446.pdf/jcr:content/translations/en.CD00000446.pdf"
+		(property "Datasheet" "https://www.diodes.com/datasheet/download/AP7381.pdf"
 			(at 87.63 119.38 0)
 			(effects
 				(font
@@ -13909,7 +14847,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Positive 100mA 30V Linear Regulator, Fixed Output 5V, TO-92"
+		(property "Description" "150mA Low Dropout Voltage Regulator, Fixed Output 5.0V, Wide Input Voltage Range 40V,  TO-92"
 			(at 87.63 118.11 0)
 			(effects
 				(font
@@ -13930,7 +14868,7 @@
 		(instances
 			(project ""
 				(path "/9770740f-e870-41f2-b9d5-05257db4c1c2"
-					(reference "U1")
+					(reference "U1_1")
 					(unit 1)
 				)
 			)
