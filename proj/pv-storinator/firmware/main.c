@@ -165,7 +165,7 @@ static enum StateMachineReturnValue statemachine()
 			}
 		} break;
 		case BMSM_DISABLE_CHARGING:
-			PIND &= ~PD_DCDC_EN;
+			PORTD &= ~PD_DCDC_EN;
 			s_bmsm = BMSM_CHECK_BATTERY_LOW;
 			break;
 		case BMSM_CHECK_BATTERY_LOW:
@@ -184,7 +184,7 @@ static enum StateMachineReturnValue statemachine()
 			}
 			// TODO: Use fan for cooling, if necessary (TH1 & TH2)
 
-			PIND |= PD_DCDC_EN;
+			PORTD |= PD_DCDC_EN;
 			{
 				// PCINT to disable charging when there's insufficient input voltage.
 				// Prepared in `main()`. See `PCINT_vect` callback.
@@ -197,7 +197,7 @@ static enum StateMachineReturnValue statemachine()
 		case BMSM_EMERGENCY_TURN_OFF:
 			if (PORTA & PA_OUT_EN) {
 				// Turn off everything
-				PIND &= ~PD_DCDC_EN;
+				PORTD &= ~PD_DCDC_EN;
 				// make sure at least one arrives at the destination
 				USART_Transmit('X');
 				USART_Transmit('X');
@@ -257,8 +257,8 @@ static void usart_rx_handler()
 		case 0x81: // Status request
 			v = (0
 				// Sensors
-				| !!(PORTB & PB_D_OUT_CONDUCTS) << 0 // battery discharging?
-				| !!(PORTB & PB_D_IN_CONDUCTS) << 1  // input voltage present?
+				| !!(PINB & PB_D_OUT_CONDUCTS) << 0 // battery discharging?
+				| !!(PINB & PB_D_IN_CONDUCTS) << 1  // input voltage present?
 				// Actors
 				| !!(PORTD & PD_DCDC_EN) << 4  // is charger ON?
 				| !!(PORTA & PA_OUT_EN) << 5
@@ -348,7 +348,7 @@ int main()
 				break;
 		}
 
-		PINA = PA_DBG_LED; // blink :)
+		// Activity indicator: see suggested circuit in README.md
 
 		usart_rx_handler();
 	}

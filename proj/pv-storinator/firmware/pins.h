@@ -13,7 +13,4 @@ enum {
 
 	PD_DCDC_EN   = 1 << PIN5,
 	PD_nOPAMP_ON = 1 << PIN6,
-
-	// For debugging
-	PA_DBG_LED = PA_FAN_EN,
 };

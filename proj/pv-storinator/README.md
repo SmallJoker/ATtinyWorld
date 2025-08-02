@@ -24,8 +24,8 @@ The hardware documented in this repository was not tested against any safety sta
 * &#10004; MCU pin mapping
 * &#10004; Schematic
 * &#10004; Layout
-* Firmware implementation
-* Dry run testing
+* &#10004; Firmware implementation + Dry run testing
+* Interface script
 * Real-world testing
 
 ## Requirements
@@ -36,3 +36,10 @@ The hardware documented in this repository was not tested against any safety sta
 * Battery overvoltage protection
 * Constant Current (CC) charging
 * Maximum Power Point Tracking (MPPT) for the PV panel
+
+## Development notes
+
+To visualize MCU activity, the TXD signal can be used to flash an LED.
+The duty-cycle is < 1 %, thus connecting an LED + R directly to TXD would not produce a well visible blinking light.
+
+![circuit](MCU UART activity indicator.png)
