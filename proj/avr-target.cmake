@@ -33,7 +33,7 @@ function(setup_avr_target TARGET_NAME)
 		COMMAND
 			${AVR_OBJCOPY} -O ihex "${TARGET_NAME}.elf" "${TARGET_NAME}.hex"
 		COMMAND # Show the program usage (code + RAM)
-			${AVR_SIZE} -C --mcu=${TYPE_GCC} "${TARGET_NAME}.elf" | grep "% "
+			${AVR_SIZE} --mcu=${TYPE_GCC} --format=avr "${TARGET_NAME}.elf" | grep "% "
 		DEPENDS "${TARGET_NAME}.elf"
 	)
 
