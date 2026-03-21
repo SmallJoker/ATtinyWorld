@@ -41,19 +41,9 @@ void PWM_ADC_Start(enum ADC_Channel which)
 _Bool PWM_ADC_Step(enum ADC_Channel which)
 {
 	_Bool comp_out = get_value(which);
-	if (comp_out) {
-		if (OCR0A < 255)
-			OCR0A++;
-		else
-			goto done;
-	} else {
-		if (OCR0A > 0)
-			OCR0A--;
-		else
-			goto done;
-	}
 
-	counter += (comp_out != comp_out_prev);
+	// Sample only in downwards direction
+	counter += (!comp_out && comp_out_prev);
 	comp_out_prev = comp_out;
 
 	if (counter >= 3) {
@@ -73,6 +63,19 @@ done:
 		DDRB &= ~PB_PWM_0A; // stop PWM output
 		PORTD |= PD_nOPAMP_ON; // reduce energy consumption
 		return 1;
+	}
+
+	if (comp_out) {
+		// OCR0A is the [-] input of the comparator -> go up.
+		if (OCR0A < 255)
+			OCR0A++;
+		else
+			goto done;
+	} else {
+		if (OCR0A > 0)
+			OCR0A--;
+		else
+			goto done;
 	}
 	return 0;
 }
