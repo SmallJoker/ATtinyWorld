@@ -5,6 +5,8 @@ The hardware documented in this repository was not tested against any safety sta
 
 **Use-cases:**
 
+* Simple battery charger
+    * Use the option `#define HAVE_OUTPUT (0)`
 * Weather logging station
 * Minimalist game or web server
 * ???
@@ -25,6 +27,7 @@ The hardware documented in this repository was not tested against any safety sta
 * &#10004; Schematic
 * &#10004; Layout
 * &#10004; Firmware implementation + Dry run testing
+    * Schematic bug: U2.2/6 should connect to `PWM_0A_DC`
 * Interface script
 * Real-world testing
 

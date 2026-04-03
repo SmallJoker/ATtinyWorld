@@ -9,18 +9,44 @@
 
 // ------------------------------- Declarations
 
+// 0: Only do battery charging. Blink LED while charging.
+#define HAVE_OUTPUT (1)
+
+#if HAVE_OUTPUT == 0
+#warning Nothing must be connected to the output!
+#endif
+
 enum {
+#if 0
+#warning Battery type: Lead-Acid 12 V
 	ADC_VBAT_CRIT   = 0xC9, // TODO critical low threshold
 	// ^ 12.5 V
 	ADC_VBAT_40PERC = 0xD1, // TODO 40% threshold
 	// ^ 13.0 V
 	ADC_VBAT_FULL   = 0xDB, // TODO (close to) 100%
 	// ^ 13.6 V
+#endif
+
+#if 1
+#warning Battery type: 8 * NiCd
+	ADC_VBAT_CRIT   = 0x95, // 1.16 V * 8 =  9.28 V (@ 0 mA)
+	ADC_VBAT_40PERC = 0xB9, // 1.43 V * 8 = 11.44 V (@ 0.1 C)
+	ADC_VBAT_FULL   = 0xBE, // 1.47 V * 8 = 11.76 V (@ 0.1 C)
+#endif
+
+	// NTC battery temperature sensor
+	// Rth1 = exp(3380 K * (25 °C - 40 °C) / (40 °C * 25 °C)) * 10 kOhm
+	// ^ absolute values must be used
+
+	// 24 °C; 10.4 kOhm --> 2.55 V --> 0x82
+	// 40 °C: 5.81 kOhm --> 1.84 V --> 0x5E
+	ADC_TH1_nMAX = 0x5E
 };
 
 enum BatteryManagementStateMachine {
 	BMSM_ENTRY,
 	BMSM_VBAT_CHECK,
+	BMSM_TH1_CHECK,
 	BMSM_DISABLE_CHARGING,
 	BMSM_CHARGE_BATTERY,
 	BMSM_CHECK_BATTERY_LOW,
@@ -78,7 +104,12 @@ static void enter_sleep()
 		// Set up watchdog to resume from sleep after X seconds
 		WDTCSR = (1 << WDIF)           // 1 -> clear flag
 			| (1 << WDE) | (1 << WDIE) // "Interrupt Mode" (Table 18)
+#if 1
 			| (1 << WDP3);             // 4 seconds (Table 19)
+#else
+#warning TESTING fast mode enabled!
+			| (1 << WDP2);             // 0.25
+#endif
 	}
 
 	// Flush pending UART data
@@ -136,6 +167,9 @@ static enum StateMachineReturnValue statemachine()
 	//USART_Transmit(0xF0 + s_bmsm);
 	switch (s_bmsm) {
 		case BMSM_ENTRY:
+			// TODO: Measure the voltage at +0 mA charge current
+			//PORTD &= ~PD_DCDC_EN;
+
 			PWM_ADC_Start(ADCC_VBAT);
 			s_bmsm = BMSM_VBAT_CHECK;
 			break;
@@ -148,8 +182,10 @@ static enum StateMachineReturnValue statemachine()
 			// Debug information
 			//USART_Transmit(OCR0A);
 
-			if (OCR0A >= ADC_VBAT_40PERC)
-				PORTA |= PA_OUT_EN;
+			if (OCR0A >= ADC_VBAT_40PERC) {
+				if (HAVE_OUTPUT)
+					PORTA |= PA_OUT_EN;
+			}
 
 			if ((PINB & PB_D_OUT_CONDUCTS) // is discharging
 					|| (OCR0A >= ADC_VBAT_FULL)) { // is full
@@ -159,7 +195,8 @@ static enum StateMachineReturnValue statemachine()
 
 			// Battery yet not full
 			if (PINB & PB_D_IN_CONDUCTS) {
-				s_bmsm = BMSM_CHARGE_BATTERY;
+				PWM_ADC_Start(ADCC_TH1);
+				s_bmsm = BMSM_TH1_CHECK;
 			} else {
 				s_bmsm = BMSM_CHECK_BATTERY_LOW;
 			}
@@ -176,6 +213,22 @@ static enum StateMachineReturnValue statemachine()
 				s_bmsm = BMSM_EMERGENCY_TURN_OFF;
 			}
 			break;
+		case BMSM_TH1_CHECK: {
+			// Measure temperature
+			_Bool done = PWM_ADC_Step(ADCC_TH1);
+			if (!done)
+				break; // postpone
+
+			if (OCR0A == 0xFF) {
+				// Disconnected TH1 (pull-up)
+				USART_Transmit('1');
+			}
+			if (OCR0A < ADC_TH1_nMAX) {
+				s_bmsm = BMSM_DISABLE_CHARGING;
+			} else {
+				s_bmsm = BMSM_CHARGE_BATTERY;
+			}
+		} break;
 		case BMSM_CHARGE_BATTERY:
 			// In case the pin has changed in the meantime -> stop.
 			if (PINB & PB_D_OUT_CONDUCTS) {
@@ -185,6 +238,11 @@ static enum StateMachineReturnValue statemachine()
 			// TODO: Use fan for cooling, if necessary (TH1 & TH2)
 
 			PORTD |= PD_DCDC_EN;
+
+			// Toggle LED to indicate status
+			if (!HAVE_OUTPUT)
+				PORTA ^= PA_OUT_EN;
+
 			{
 				// PCINT to disable charging when there's insufficient input voltage.
 				// Prepared in `main()`. See `PCINT_vect` callback.
@@ -192,13 +250,18 @@ static enum StateMachineReturnValue statemachine()
 			}
 			return RV_RESET_AND_SLEEP;
 		case BMSM_KEEP_DISCHARGING:
+			// Mark as "charging done"
+			if (!HAVE_OUTPUT)
+				PORTA |= PA_OUT_EN;
+
 			// do nothing
 			return RV_RESET_AND_SLEEP;
 		case BMSM_EMERGENCY_TURN_OFF:
+			// Turn off everything
+			PORTD &= ~PD_DCDC_EN; // (should already be off)
+
 			if (PORTA & PA_OUT_EN) {
-				// Turn off everything
-				PORTD &= ~PD_DCDC_EN;
-				// make sure at least one arrives at the destination
+				// Signal emergency shutdown: twice to be sure
 				USART_Transmit('X');
 				USART_Transmit('X');
 
@@ -218,7 +281,10 @@ static enum StateMachineReturnValue statemachine()
 
 			s_bmsm = BMSM_HELPER_DELAY;
 			s_bmsm_delayed = BMSM_ENTRY;
-			delay_counter = 16; // 64 seconds (@ 4 seconds sleep interval)
+			if (HAVE_OUTPUT)
+				delay_counter = 16; // 64 seconds (@ 4 seconds sleep interval)
+			else
+				delay_counter = 0;
 			break;
 		case BMSM_HELPER_DELAY:
 			// Used for long delays. Use Power-down cycles.
@@ -259,6 +325,7 @@ static void usart_rx_handler()
 				// Sensors
 				| !!(PINB & PB_D_OUT_CONDUCTS) << 0 // battery discharging?
 				| !!(PINB & PB_D_IN_CONDUCTS) << 1  // input voltage present?
+				| (g_adc_values[ADCC_TH1] != 0xFF) << 2 // TH1 OK?
 				// Actors
 				| !!(PORTD & PD_DCDC_EN) << 4  // is charger ON?
 				| !!(PORTA & PA_OUT_EN) << 5
