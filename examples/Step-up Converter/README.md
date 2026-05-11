@@ -10,16 +10,16 @@ It is based on a few [Joule Thief](https://en.wikipedia.org/wiki/Joule_thief) ci
 * https://www.b-kainka.de/bastel36.htm
 * https://www.elektronik-labor.de/Notizen/LEDwandler1W.html
 
-Schematic: [Step-up Converter.png](Step-up Converter.png)
+Schematic: [Step-up% Converter.png](Step-up%20Converter.png)
 
 ### Measurement results
 
-"Power on": [Measurement result](MEAS Start-up 4k7Ohm load.png) (Input: 5 V, Load: 4.7 kOhm)
+"Power on": [Measurement result](MEAS%20Start-up%204k7Ohm%20load.png) (Input: 5 V, Load: 4.7 kOhm)
 
  * Channel 1: Base of switching NPN
  * Channel 2: Output voltage
 
-Under load: [Measurement result](MEAS 195Ohm load.png) (Input: 4.5 V, Load: 195 Ohm)
+Under load: [Measurement result](MEAS%20195Ohm%20load.png) (Input: 4.5 V, Load: 195 Ohm)
 
  * Channel 1: Base of switching NPN
  * Channel 2: Collector of the switching NPN

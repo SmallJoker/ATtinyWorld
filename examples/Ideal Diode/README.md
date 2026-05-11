@@ -4,7 +4,7 @@
 
 This circuit was created and simulated in [Qucs-S](https://github.com/ra3xdh/qucs_s), using [ngspice](https://sourceforge.net/projects/ngspice/). Real-world results can be found below.
 
-Schematic: [Almost ideal diode.png](Almost ideal diode.png)
+Schematic: [Almost ideal diode.png](Almost%20ideal%20diode.png)
 
 ### Features
 
@@ -48,7 +48,7 @@ Assuming V<sub>in</sub> = 10 V unless otherwise stated.
 3. `Rc`: The circuit will drift depending on temperature. This resistor adds a
    safety margin, at the cost of higher forward voltage drops. The additional
    voltage drop is roughly proportional to V<sub>in</sub>.
-4. The idle forward voltage drop should be >= 20 mV to prevent reverse leakage 
+4. The idle forward voltage drop should be >= 20 mV to prevent reverse leakage
    current.
 5. `Q1`: Testing has shown that a BJT results in a better linearity as
    compared to the combination of a diode (e.g. 1N4148) + 1.8 kΩ resistor.

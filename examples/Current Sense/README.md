@@ -4,7 +4,7 @@
 
 This circuit was created and simulated in [Qucs-S](https://github.com/ra3xdh/qucs_s), using [ngspice](https://sourceforge.net/projects/ngspice/).
 
-Schematic: [Current Sense.png](Current Sense.png)
+Schematic: [Current Sense.png](Current%20Sense.png)
 
 ### Features
 
