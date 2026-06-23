@@ -27,7 +27,6 @@ The hardware documented in this repository was not tested against any safety sta
 * &#10004; Schematic
 * &#10004; Layout
 * &#10004; Firmware implementation + Dry run testing
-    * Schematic bug: U2.2/6 should connect to `PWM_0A_DC`
 * Interface script
 * Real-world testing
 
@@ -46,3 +45,7 @@ To visualize MCU activity, the TXD signal can be used to flash an LED.
 The duty-cycle is < 1 %, thus connecting an LED + R directly to TXD would not produce a well visible blinking light.
 
 ![circuit](MCU UART activity indicator.png)
+
+### Bugs in 2025-07-26
+
+* Schematic: U2.2/6 should connect to `PWM_0A_DC`

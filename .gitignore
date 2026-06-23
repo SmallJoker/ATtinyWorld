@@ -20,3 +20,8 @@ Makefile
 # IDE
 .kdev4/
 *.kdev4
+
+# KiCad
+~*.lck
+*-backups/
+sym-lib-table
