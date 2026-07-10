@@ -25,7 +25,7 @@ Use-cases:
 2. `Q1` and `Q2` are of different types to highlight that they are not a matched pair.
    However, a low difference in h<sub>fe</sub> is recommended, also to ensure similar V<sub>eb</sub>.
 3. Depending on the application, `Re` may have to be as low as 0 Ω. This also depends on `Rs`.
-4. `R2` should be fine-tuned to the desired voltage.
+4. `R2` should be fine-tuned to the desired threshold.
 
 ## Proper industrial solutions
 
