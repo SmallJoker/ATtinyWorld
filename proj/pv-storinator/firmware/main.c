@@ -7,6 +7,16 @@
 #include "USART_RS232_RX_BUF.h"
 #include "USART_RS232_TX_BUF.h"
 
+/*
+Timer 0
+	Channel A: PWM output for ADC
+Timer 1
+	Main loop clock
+Comparator
+	ADC for battery voltage
+*/
+
+
 // ------------------------------- Declarations
 
 // 0: Only do battery charging. Blink LED while charging.
@@ -31,7 +41,8 @@ enum {
 #warning Battery type: 8 * NiCd
 	ADC_VBAT_CRIT   = 0x95, // 1.16 V * 8 =  9.28 V (@ 0 mA)
 	ADC_VBAT_40PERC = 0xB9, // 1.43 V * 8 = 11.44 V (@ 0.1 C)
-	ADC_VBAT_FULL   = 0xBE, // 1.47 V * 8 = 11.76 V (@ 0.1 C)
+	ADC_VBAT_FULL_C = 0xBE, // 1.47 V * 8 = 11.76 V (@ 0.1 C)
+	ADC_VBAT_FULL_Z = 0xB1, // 1.37 V * 8 = 10.96 V (@ -0.1 C)
 #endif
 
 	// NTC battery temperature sensor
@@ -167,9 +178,6 @@ static enum StateMachineReturnValue statemachine()
 	//USART_Transmit(0xF0 + s_bmsm);
 	switch (s_bmsm) {
 		case BMSM_ENTRY:
-			// TODO: Measure the voltage at +0 mA charge current
-			//PORTD &= ~PD_DCDC_EN;
-
 			PWM_ADC_Start(ADCC_VBAT);
 			s_bmsm = BMSM_VBAT_CHECK;
 			break;
@@ -187,8 +195,10 @@ static enum StateMachineReturnValue statemachine()
 					PORTA |= PA_OUT_EN;
 			}
 
-			if ((PINB & PB_D_OUT_CONDUCTS) // is discharging
-					|| (OCR0A >= ADC_VBAT_FULL)) { // is full
+			u8 threshold = (PORTD & PD_DCDC_EN) ? ADC_VBAT_FULL_C : ADC_VBAT_FULL_Z;
+
+			if ((PINB & PB_D_OUT_CONDUCTS) // lack of PV input
+					|| (OCR0A >= threshold)) { // is full
 				s_bmsm = BMSM_DISABLE_CHARGING;
 				break;
 			}
@@ -364,10 +374,12 @@ int main()
 #if F_CPU != 8000000
 #error Calculations assume 8 MHz clock
 #endif
-		// Main loop timing: use Timer 1
-		TCCR1B = (0b001 << CS10); // clk / 1 (Table 46)
-		// (no interrupt, TOIE1=0)
-		OCR1 = 16000 - 2; // approx. 2 ms
+		// Timer 1: Main loop timing
+		TCCR1B = 0
+			| (1 << WGM12)     // Mode 4, CTC (Table 45)
+			| (0b001 << CS10); // clk / 1 (Table 46)
+		// (no interrupt, OCIE1A=0)
+		OCR1A = 32000 - 1; // 4 ms
 	}
 
 	{
@@ -391,9 +403,8 @@ int main()
 	while (1) {
 		{
 			// Periodic execution. Wait for next cycle.
-			while (!(TIFR & (1 << TOV1)));
-			TCNT1 = 0;           // restart counter
-			TIFR |= (1 << TOV1); // 1 -> clear flag
+			while (!(TIFR & (1 << OCF1A)));
+			TIFR |= (1 << OCF1A); // 1 -> clear flag
 		}
 
 		wdt_reset(); // Ping! We are still alive!

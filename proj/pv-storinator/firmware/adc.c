@@ -30,7 +30,7 @@ void PWM_ADC_Start(enum ADC_Channel which)
 	PORTD &= ~PD_nOPAMP_ON; // prevent powering the aux. OPAMP using our PWM.
 
 	counter = 0;
-	OCR0A = g_adc_values[which] - 4; // try to approach from the bottom
+	OCR0A = g_adc_values[which];
 	TCCR0A |= (0b10 << COM0A0); // Output=1 when below threshold (Table 34)
 
 	// PB2: OC0A, timer 0 PWM output (Page 54)
