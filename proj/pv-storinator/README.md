@@ -49,3 +49,13 @@ The duty-cycle is < 1 %, thus connecting an LED + R directly to TXD would not pr
 ### Bugs in 2025-07-26
 
 * Schematic: U2.2/6 should connect to `PWM_0A_DC`
+
+## Monitor script
+
+**Dependencies**
+
+* `serial` (apt `python3-serial`)
+
+**Usage:**
+
+* `python3 monitor.py /dev/ttyS`

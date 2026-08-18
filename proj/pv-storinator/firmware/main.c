@@ -37,12 +37,20 @@ enum {
 	// ^ 13.6 V
 #endif
 
-#if 1
+#if 0
 #warning Battery type: 8 * NiCd
 	ADC_VBAT_CRIT   = 0x95, // 1.16 V * 8 =  9.28 V (@ 0 mA)
 	ADC_VBAT_40PERC = 0xB9, // 1.43 V * 8 = 11.44 V (@ 0.1 C)
 	ADC_VBAT_FULL_C = 0xBE, // 1.47 V * 8 = 11.76 V (@ 0.1 C)
 	ADC_VBAT_FULL_Z = 0xB1, // 1.37 V * 8 = 10.96 V (@ -0.1 C)
+#endif
+
+#if 1
+#warning Battery type: 6 * NiCd
+	ADC_VBAT_CRIT   = 0x6F, // 1.16 V (@ 0 mA)
+	ADC_VBAT_40PERC = 0x8A, // 1.43 V (@ 0.1 C)
+	ADC_VBAT_FULL_C = 0x8D, // 1.46 V (@ 0.1 C)
+	ADC_VBAT_FULL_Z = 0x84, // 1.37 V (@ -0.1 C)
 #endif
 
 	// NTC battery temperature sensor
@@ -232,6 +240,8 @@ static enum StateMachineReturnValue statemachine()
 			if (OCR0A == 0xFF) {
 				// Disconnected TH1 (pull-up)
 				USART_Transmit('1');
+				s_bmsm = BMSM_DISABLE_CHARGING;
+				break;
 			}
 			if (OCR0A < ADC_TH1_nMAX) {
 				s_bmsm = BMSM_DISABLE_CHARGING;
